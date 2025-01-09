@@ -1,0 +1,191 @@
+Main_Activity.java
+package com.example.simpleform;
+
+import android.app.DatePickerDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        EditText uin = findViewById(R.id.uin); // UserName input
+        EditText pin = findViewById(R.id.pin); // Password input
+        EditText ain = findViewById(R.id.ain); // Address input
+        EditText din = findViewById(R.id.din); // DOB input
+        Spinner sin = findViewById(R.id.sin); // State spinner
+        Button btn = findViewById(R.id.btn); // Submit button
+        TextView out = findViewById(R.id.out); // Output text
+
+        // Spinner setup
+        String[] states = {"AP", "TG"};
+        ArrayAdapter<String> adp = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, states);
+        sin.setAdapter(adp);
+
+        // Date picker for DOB
+        din.setOnClickListener(v -> {
+            Calendar cal = Calendar.getInstance();
+            int yr = cal.get(Calendar.YEAR);
+            int mn = cal.get(Calendar.MONTH);
+            int dy = cal.get(Calendar.DAY_OF_MONTH);
+
+            new DatePickerDialog(MainActivity.this, (view, yr1, mn1, dy1) ->
+                    din.setText(dy1 + "/" + (mn1 + 1) + "/" + yr1), yr, mn, dy).show();
+        });
+
+        // Button click to display data
+        btn.setOnClickListener(v -> {
+            String usr = uin.getText().toString();
+            String pwd = pin.getText().toString();
+            String addr = ain.getText().toString();
+            String dob = din.getText().toString();
+            String sta = sin.getSelectedItem().toString();
+
+            out.setText("UserName: " + usr + "\nPassword: " + pwd + "\nAddress: " + addr +
+                    "\nDOB: " + dob + "\nState: " + sta);
+            out.setVisibility(View.VISIBLE);
+        });
+    }
+}
+
+XML_ACTIVITY
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserName:"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+        <EditText
+            android:id="@+id/uin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter your username"
+            android:inputType="text"
+            android:background="@android:drawable/editbox_background_normal"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password:"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+        <EditText
+            android:id="@+id/pin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:background="@android:drawable/editbox_background_normal"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address:"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+        <EditText
+            android:id="@+id/ain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter your address"
+            android:inputType="textPostalAddress"
+            android:background="@android:drawable/editbox_background_normal"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOB:"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+        <EditText
+            android:id="@+id/din"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select your date of birth"
+            android:focusable="false"
+            android:background="@android:drawable/editbox_background_normal"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State:"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+        <Spinner
+            android:id="@+id/sin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/editbox_background_normal" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</LinearLayout>

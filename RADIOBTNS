@@ -1,0 +1,79 @@
+activity_main.xml
+-----------------------------------------------------------------------------------------------------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What is your fav Lab?"
+        android:textSize="18sp" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+        <RadioButton
+            android:id="@+id/radioML"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ML" />
+        <RadioButton
+            android:id="@+id/radioLPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LPS" />
+        <RadioButton
+            android:id="@+id/radioAAD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AAD" />
+        <RadioButton
+            android:id="@+id/radioBDT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BDT" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MainActivity.java
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+package com.example.exp8;
+import android.os.*;
+import android.widget.*;
+import androidx.appcompat.app.*;
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+
+        RadioGroup rg = findViewById(R.id.radioGroup);
+        TextView rt = findViewById(R.id.resultText);
+        Button sb = findViewById(R.id.submitBtn);
+
+        sb.setOnClickListener(v -> {
+            int id = rg.getCheckedRadioButtonId();
+            if (id != -1) {
+                RadioButton sr = findViewById(id);
+                rt.setText("Your Fav lab is " + sr.getText());
+            }
+        });
+    }
+}

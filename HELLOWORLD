@@ -1,5 +1,5 @@
+EXPx2
 MainActivty.java
-
 package com.example.app2;
 import android.app.*;
 import android.os.*;
@@ -9,10 +9,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
 }
-
-
 activity_main.xml
-
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -23,5 +20,957 @@ activity_main.xml
         android:text="Hello, World!"
         android:layout_gravity="center" />
 </FrameLayout>
+----------------------------------------------------------------------------------------------------------------------
+EXPx3
+MA.java
+package com.example.app3;
+import android.app.*;
+import android.os.*;
+import android.widget.*;
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+        EditText e = findViewById(R.id.e);
+        Button btn = findViewById(R.id.b);
+        TextView t = findViewById(R.id.t);
+        btn.setOnClickListener(v -> t.setText("Hello, " + e.getText().toString()));
+    }
+}
+am.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="18sp"
+            android:layout_marginEnd="8dp" />
+        <EditText
+            android:id="@+id/e"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:hint="Enter name"
+            android:textColor="@android:color/white"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
+
+    <TextView
+        android:id="@+id/t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="16dp"
+        android:textSize="18sp" />
+</LinearLayout>
+
+-----------------------------------------------
+EXPx4
+package com.example.exp4;
+import android.app.*;
+import android.os.*;
+import android.widget.*;
+public class MainActivity extends Activity {
+    EditText n, p, a, x;
+    RadioGroup r;
+    DatePicker d;
+    Spinner s;
+    Button b;
+    TextView t;
+    String[] st = {"California", "New York", "Texas", "Florida"};
+    @Override protected void onCreate(Bundle s0) {
+        super.onCreate(s0);
+        setContentView(R.layout.activity_main);
+        n = findViewById(R.id.etName);
+        p = findViewById(R.id.etPassword);
+        a = findViewById(R.id.etAddress);
+        r = findViewById(R.id.rgGender);
+        x = findViewById(R.id.etAge);
+        d = findViewById(R.id.dpDOB);
+        s = findViewById(R.id.spState);
+        b = findViewById(R.id.btnSubmit);
+        t = findViewById(R.id.tvOut);
+
+        ArrayAdapter<String> A = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, st);
+        A.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(A);
+        b.setOnClickListener(v -> {
+            int i = r.getCheckedRadioButtonId();
+            String g = i != -1 ? ((RadioButton)findViewById(i)).getText().toString() : "";
+            String o = "User Name: " + n.getText() + "\nPassword: " + p.getText() +
+                    "\nAddress: " + a.getText() + "\nGender: " + g +
+                    "\nAge: " + x.getText() +
+                    "\nDOB: " + d.getDayOfMonth() + "/" + (d.getMonth()+1) + "/" + d.getYear() +
+                    "\nState: " + s.getSelectedItem();
+            t.setText(o);
+        });
+    }
+}
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User Name"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"/>
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address"/>
+
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"/>
+
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"/>
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:inputType="number"/>
+
+        <DatePicker
+            android:id="@+id/dpDOB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="true"/>
+
+        <Spinner
+            android:id="@+id/spState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"/>
+
+        <TextView
+            android:id="@+id/tvOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+</ScrollView>
+____________________________________________________________________________________________________________________________
+EXPx5
+MainActivity.java
+package com.example.exp5;
+import android.os.*;
+import android.app.*;
+import android.widget.*;
+import android.content.*;
+public class MainActivity extends Activity {
+    EditText n, p;
+    Button s;
+
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.a);
+
+        n = findViewById(R.id.n);
+        p = findViewById(R.id.p);
+        s = findViewById(R.id.s);
+        s.setOnClickListener(v -> {
+
+            Intent i = new Intent(this, SecondActivity.class);
+            i.putExtra("n", n.getText().toString());
+            i.putExtra("p", p.getText().toString());
+            startActivity(i);
+        });
+    }
+}
+SecondActivity.java
+package com.example.exp5;
+import android.os.*;
+import android.app.*;
+import android.content.*;
+import android.widget.*;
+public class SecondActivity extends Activity {
+    TextView u, w, t;
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.b);
+        u = findViewById(R.id.u);
+        w = findViewById(R.id.w);
+        t = findViewById(R.id.t);
+        Intent i = getIntent();
+        u.setText("UserName: " + i.getStringExtra("n"));
+        w.setText("Password: " + i.getStringExtra("p"));
+        t.setText("This is second page");
+    }
+}
+a.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#000"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="#fff" />
+        <EditText
+            android:id="@+id/n"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="#444"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="#fff" />
+        <EditText
+            android:id="@+id/p"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="#444"
+            android:textColor="#fff"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+b.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#000"
+    android:padding="16dp">
+    <TextView
+        android:id="@+id/u"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/w"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+AM.xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Exp5"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SecondActivity" />
+    </application>
+
+</manifest>
+<activity android:name=".SecondActivity" />
+----------------------------------------------------------------------------------------------------------------------------------
+EXPx6
+package com.example.exp6;
+import android.os.*;
+import android.app.*;
+import android.widget.*;
+import android.content.*;
+
+import android.net.*;
+
+public class MainActivity extends Activity {
+    EditText p, m;
+    Button s;
+
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+
+        p = findViewById(R.id.p);
+        m = findViewById(R.id.m);
+        s = findViewById(R.id.s);
+        s.setOnClickListener(v -> {
+
+            String n = p.getText().toString();
+            String t = m.getText().toString();
+            Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + n));
+            i.putExtra("sms_body", t);
+
+            startActivity(i);
+            Toast.makeText(this, "SMS sent", Toast.LENGTH_SHORT).show();
+        });
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone no" />
+        <EditText
+            android:id="@+id/p"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:background="#444"
+            android:textColor="#fff"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Msg" />
+        <EditText
+            android:id="@+id/m"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="#444"
+            android:textColor="#fff"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+---------------------------------------------------------------------------------------------------------------------------------
+package com.example.exp6;
+
+import android.Manifest;
+import android.app.Activity;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.content.pm.PackageManager;
+
+public class MainActivity extends Activity {
+    EditText p, m;
+    Button s;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Request SMS permission if not already granted
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, PERMISSION_REQUEST_CODE);
+        }
+
+        p = findViewById(R.id.p);
+        m = findViewById(R.id.m);
+        s = findViewById(R.id.s);
+
+        s.setOnClickListener(v -> {
+            String number = p.getText().toString();
+            String message = m.getText().toString();
+            try {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(number, null, message, null, null);
+                Toast.makeText(this, "SMS sent", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(this, "SMS failed, please try again", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
+    }
+}
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.exp6">
+
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Exp6">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone no" />
+        <EditText
+            android:id="@+id/p"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:background="#444"
+            android:textColor="#fff"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Msg" />
+        <EditText
+            android:id="@+id/m"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="#444"
+            android:textColor="#fff"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+---------------------------------------------------------------------------------------------------------------------------------
+EXPx7
+-------------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Seven"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+----------------------------------------------------------------------------------------------------------------------------------MainActivity.java
+package com.example.seven;
+import android.app.*;
+import android.os.*;
+public class MainActivity extends Activity {
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+        if(b == null) {
+            getFragmentManager().beginTransaction().add(R.id.c, new FirstFragment()).commit();
+        }
+    }
+}
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/c"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+FirstFragment.java
+package com.example.seven;
+import android.app.*;
+import android.os.*;
+import android.view.*;
+import android.widget.*;
+public class FirstFragment extends Fragment {
+    public View onCreateView(LayoutInflater i, ViewGroup c, Bundle b) {
+        View v = i.inflate(R.layout.f1, c, false);
+        Button s = v.findViewById(R.id.s);
+        s.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.c, new SecondFragment()).commit();
+            }
+        });
+        return v;
+    }
+}
+f1.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is first fragment"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click to go to second fragment"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+SecondFragment.java
+package com.example.seven;
+import android.app.*;
+import android.os.*;
+import android.view.*;
+import android.widget.*;
+public class SecondFragment extends Fragment {
+    public View onCreateView(LayoutInflater i, ViewGroup c, Bundle b) {
+        View v = i.inflate(R.layout.f2, c, false);
+        Button s = (Button)v.findViewById(R.id.s);
+        s.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.c, new FirstFragment()).commit();
+            }
+        });
+        return v;
+    }
+}
+f2.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF69B4"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is second frag"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click to go to first fragment"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+---------------------------------------------------------------------------
+EXPx8
+package com.example.exp8;
+import android.os.*;
+import android.app.*;
+import android.widget.*;
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+        RadioGroup rg = findViewById(R.id.radioGroup);
+        TextView rt = findViewById(R.id.resultText);
+        Button sb = findViewById(R.id.submitBtn);
+        sb.setOnClickListener(v -> {
+            int id = rg.getCheckedRadioButtonId();
+            if (id != -1) {
+                RadioButton sr = findViewById(id);
+                rt.setText("Your Fav lab is " + sr.getText());
+            }
+        });
+    }
+}
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="315dp"
+        android:layout_height="wrap_content"
+        android:text="What is your fav Lab?"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+        <RadioButton
+            android:id="@+id/radioML"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ML" />
+        <RadioButton
+            android:id="@+id/radioLPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LPS" />
+        <RadioButton
+            android:id="@+id/radioAAD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AAD" />
+        <RadioButton
+            android:id="@+id/radioBDT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BDT" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_marginTop="16dp" />
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
 
 
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------EXPx9
+----------------------------------------------------------------------------------------------------------------------------------MainActivity.java
+package com.example.optionsmenu;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(this, item.getTitle() + " Selected", Toast.LENGTH_SHORT).show();
+        return super.onOptionsItemSelected(item);
+    }
+}
+activty_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>
+menu.xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item1"
+        android:title="Item 1" />
+    <item
+        android:id="@+id/item2"
+        android:title="Item 2" />
+    <item
+        android:id="@+id/item3"
+        android:title="Item 3" />
+</menu>
+
+android:theme="@style/AppTheme"
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+    </application>
+</manifest>
+
+styles.xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+    <style name="MyActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="background">@android:color/darker_gray</item>
+    </style>
+</resources>
+
+
+
+
+
+package com.example.exp9;
+import android.os.*;
+import android.view.*;
+import android.widget.*;
+import androidx.appcompat.app.*;
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.activity_main);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(this, item.getTitle() + " Selected", Toast.LENGTH_SHORT).show();
+        return super.onOptionsItemSelected(item);
+    }
+}
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item1"
+        android:title="Item 1" />
+    <item
+        android:id="@+id/item2"
+        android:title="Item 2" />
+    <item
+        android:id="@+id/item3"
+        android:title="Item 3" />
+</menu>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+    <style name="MyActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="background">@android:color/darker_gray</item>
+    </style>
+</resources>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

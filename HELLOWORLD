@@ -1,14 +1,15 @@
 MainActivty.java
 
-package com.example.exp2;
-import android.app.Activity;
-import android.os.Bundle;
+package com.example.app2;
+import android.app.*;
+import android.os.*;
 public class MainActivity extends Activity {
     protected void onCreate(Bundle s) {
         super.onCreate(s);
         setContentView(R.layout.activity_main);
     }
 }
+
 
 activity_main.xml
 
@@ -22,4 +23,5 @@ activity_main.xml
         android:text="Hello, World!"
         android:layout_gravity="center" />
 </FrameLayout>
+
 
